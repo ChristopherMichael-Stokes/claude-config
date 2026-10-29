@@ -1,0 +1,22 @@
+line-length = 100
+# ruff ignores PEP 723 metadata; keep in step with sync.py's requires-python
+target-version = "py312"
+
+[lint]
+select = ["ALL"]
+ignore = [
+  # conflict with the formatter
+  "COM812",
+  "COM819",
+  "ISC001",
+  # incompatible with D211 / D212, which are kept
+  "D203",
+  "D213",
+  # no copyright headers in this repo
+  "CPY001",
+  # sync.py is a CLI; print is its output
+  "T201",
+]
+
+[lint.pydocstyle]
+convention = "google"

@@ -1,0 +1,6 @@
+[global]
+line-length = 100
+
+[per-file-ignores]
+# subagent bodies are system prompts, not documents
+"config/agents/*.md" = ["MD041"]

@@ -1,0 +1,33 @@
+{
+  "model": "opus",
+  "enableWorkflows": true,
+  "feedbackDrafts": "notify",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-and-agents-md"
+      }
+    }
+  },
+  "theme": "dark",
+  "preferredNotifChannel": "auto",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "permissions": {
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(git stash drop *)",
+      "Bash(git checkout -- *)"
+    ],
+    "ask": [
+      "Bash(git commit *)"
+    ]
+  }
+}
