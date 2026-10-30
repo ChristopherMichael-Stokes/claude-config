@@ -1,5 +1,17 @@
 {
-  "model": "opus",
+  "permissions": {
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(git stash drop *)",
+      "Bash(git checkout -- *)"
+    ],
+    "ask": [
+      "Bash(git commit *)"
+    ]
+  },
+  "model": "sonnet",
   "enableWorkflows": true,
   "feedbackDrafts": "notify",
   "modelSettings": {
@@ -17,17 +29,5 @@
   "theme": "dark",
   "preferredNotifChannel": "auto",
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "permissions": {
-    "deny": [
-      "Bash(git push *)",
-      "Bash(git reset --hard *)",
-      "Bash(git clean *)",
-      "Bash(git stash drop *)",
-      "Bash(git checkout -- *)"
-    ],
-    "ask": [
-      "Bash(git commit *)"
-    ]
-  }
+  "agentPushNotifEnabled": true
 }
