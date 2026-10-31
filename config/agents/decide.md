@@ -1,11 +1,9 @@
 ---
 name: decide
 description: >-
-  Expert decision adviser on the strongest model. Consult to shape the recommendation for a
-  planned fork (architecture, API/schema shape, new dependency), choose at a technical fork
-  mid-task or anything hard to reverse, get unstuck after two failed attempts or evidence that
-  doesn't fit, settle conflicting research, or review nontrivial work before declaring it done.
-  Advice only; changes nothing.
+  Independent second opinion on the strongest model, consulted when CLAUDE.md's consult
+  conditions hold: a recommendation on a decision, a way out when stuck, or a review before
+  declaring work done. Advice only; changes nothing.
 model: opus
 disallowedTools: Edit, Write, NotebookEdit, Agent
 ---

@@ -1,9 +1,10 @@
 ---
 name: code-cheap
 description: >-
-  Cheap code-change tier. Use for a fully specified mechanical change: a rename across files,
-  applying an already-agreed pattern, or a fix whose cause and location the brief gives. Edits,
-  verifies with the project's checks, and returns a change report.
+  Cheap code-change tier. Use when an existing pattern in the repo fixes the structure and the
+  brief fixes the intent and acceptance check: a rename across files, applying an agreed
+  pattern, a change that copies an existing exemplar. Edits, verifies with the project's checks,
+  and returns a change report.
 model: haiku
 disallowedTools: Agent
 ---

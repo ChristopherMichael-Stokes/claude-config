@@ -138,10 +138,8 @@ included.
 - Do a lookup you can finish in a handful of tool calls yourself (grep,
   Read, `--help`). Delegate research that is wide (many files or sources),
   would flood the main context, or needs an API or spec validated against
-  source or docs. Use the cheapest tier that fits: `research-cheap` for a
-  known target, `research-mid` to join several pieces, `research-strong` for
-  prior art or a method's fit. Escalate one tier if the report is thin or
-  says the question is beyond it.
+  source or docs, to the cheapest `research-*` tier that fits. Escalate one
+  tier if the report is thin or says the question is beyond it.
 - `decide` gives an independent second opinion. When the main thread runs a
   weaker model than `decide`, consult it to shape a planned fork's
   recommendation, at a hard-to-reverse technical choice, when stuck (two
@@ -153,18 +151,14 @@ included.
   options, evidence so far and constraints; follow its call or surface the
   disagreement to me.
 - Make small code edits directly. Delegate a sizeable, self-contained code
-  change to `code-cheap`, `code-mid` or `code-strong`, on the cheapest tier
-  the task's riskiest step clears, not its size; design goes through
-  `decide` when its consult conditions hold. Tier by how much structure
-  the code must invent, since cheaper models write less maintainable
-  structure: `code-cheap` when an existing pattern fixes it, `code-mid`
-  (the default) when the brief fixes it, `code-strong` only for structure
-  that can't be fixed up front or subtle correctness (concurrency, delicate
-  numerics). Before delegating, the main thread settles the structure
-  in the brief (modules, public signatures and types, an exemplar to
-  follow when known) so `code-mid` fills it in; every tier explores the
-  repo for the rest. The brief carries the agreed plan, the files in
-  scope, the exact acceptance check command, and what "done" means; the
+  change to the cheapest `code-*` tier that fits, judged by the structure
+  the code must invent, not its size; design goes through `decide` when its
+  consult conditions hold. Cheaper models write less maintainable
+  structure, so before delegating the main thread settles it in the brief
+  (modules, public signatures and types, an exemplar to follow when known);
+  every tier explores the repo for the rest. The brief carries the agreed
+  plan, the files in scope, the exact acceptance check command, and what
+  "done" means; the
   main thread reviews the diff for maintainability as well as correctness,
   and the agent's check output, before accepting. Escalate one tier when
   an agent reports `beyond tier` or its work fails review; a cheaper
