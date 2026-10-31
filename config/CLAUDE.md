@@ -155,10 +155,19 @@ included.
 - Make small code edits directly. Delegate a sizeable, self-contained code
   change to `code-cheap`, `code-mid` or `code-strong`, on the cheapest tier
   the task's riskiest step clears, not its size; design goes through
-  `decide` when its consult conditions hold. The brief carries the agreed
-  plan, the files in scope, and what "done" means; the main thread reviews
-  the diff and the agent's check output before accepting. Escalate one tier
-  when an agent reports `beyond tier` or its work fails review; a cheaper
+  `decide` when its consult conditions hold. Tier by how much structure
+  the code must invent, since cheaper models write less maintainable
+  structure: `code-cheap` when an existing pattern fixes it, `code-mid`
+  (the default) when the brief fixes it, `code-strong` only for structure
+  that can't be fixed up front or subtle correctness (concurrency, delicate
+  numerics). Before delegating, the main thread settles the structure
+  in the brief (modules, public signatures and types, an exemplar to
+  follow when known) so `code-mid` fills it in; every tier explores the
+  repo for the rest. The brief carries the agreed plan, the files in
+  scope, the exact acceptance check command, and what "done" means; the
+  main thread reviews the diff for maintainability as well as correctness,
+  and the agent's check output, before accepting. Escalate one tier when
+  an agent reports `beyond tier` or its work fails review; a cheaper
   tier never lowers the bar. Parallel editing agents only when the work
   partitions cleanly: no two agents editing or re-reading the same files.
   The main thread briefs, reviews, integrates, and keeps the important edits
