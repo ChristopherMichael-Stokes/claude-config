@@ -69,7 +69,15 @@ included.
   buried.
 - Minimal correct answer first; expand on request or when needed for
   safety/correctness. My daily budget for technical reading is limited —
-  status updates are a few scannable lines, never an essay.
+  status updates are at most five lines with at most one question, never an
+  essay or a menu of options.
+- When the thing I asked for is finished, say so and stop: "Done: X.
+  Running: nothing." No proposed next steps, extra checks or side
+  questions unless I ask what's next; one line is allowed for a blocker or a
+  result that changes the plan. I track one thread at a time.
+- Name things by what they are ("the frame-selection experiment"). Plan
+  codes and internal labels (E2, F-E1, M3) never reach me: not in chat,
+  status files, briefs or human docs.
 - Bullets over prose for status and results; small tables for enumerable
   facts, measurements, and designs.
 - No filler: no preamble, no restating the question, no "here's what I'll do"
@@ -97,6 +105,20 @@ included.
     fixing a bug whose cause is clear.
 - Before exploratory or experimental work costing more than a short session,
   say what it would settle and ask. Mechanical work is exempt.
+- Every experiment opens with a card of a few lines: the hypothesis (mine,
+  when I gave one), the conditions that make the test fair to it, the result
+  that stops the line, and a timebox. My stated hypothesis is tested under my
+  stated conditions before any variant of your own.
+- A failed test is recorded with its scope (data, conditions, sample size)
+  in the doc header and the decision log. A method is "not yet shown to work
+  on X", never "does not work", until it has failed under the conditions its
+  proponent named.
+- An instruction I give in chat that changes how the work runs (rates,
+  hardware, places never to name) becomes a default in code, config or the
+  project's agent instructions in the same turn.
+- An idea I raise mid-task is one line in the project's backlog, not a plan
+  doc, until I pull it in, so don't halt your current work and start on it
+  unless I explicitly instruct so.
 - Cheap checks before long runs. Before any run longer than a few minutes
   (full dataset, full sweep, long build), run the exact same path end to end
   on a tiny slice (a handful of items, one config) and confirm every stage
@@ -104,7 +126,7 @@ included.
   files. If the code can't run a stage on a slice, fix that first. Never
   discover a late-stage bug at the end of a full run.
 - Long jobs are watched. A process or subagent task expected to run longer
-  than ~10 minutes logs a line per stage or batch with a count/total, plus a
+  than a few minutes logs a line per stage or batch with a count/total, plus a
   final done or failed line, to a named file; its brief names that file. Arm
   a Monitor on it that surfaces failures and exits, not just progress. A job
   whose output stops advancing is stalled: inspect it, then stop it or fix
@@ -121,8 +143,9 @@ included.
   conditions hold. Scope forks: take the option that stays inside the agreed
   scope. Log each such decision, and report checkpoint statuses and
   decisions batched in the final summary.
-- Forks that come to me come with concrete options and a recommendation.
-  Auto-decide only when one answer is clearly best.
+- Inside a goal I've approved, technical calls are yours: make them and list
+  them in the next status. Only scope, cost and changes to what ships come
+  to me.
 - Work whose result is judged by eye (images, fits, meshes, maps, plots)
   ends in an artifact page with before/after views and metrics beside them,
   never metrics alone, built per the `visual-review` skill.
@@ -323,6 +346,9 @@ included.
 - Project docs hold what the code can't say: constraints, commands,
   decisions, standards. How code works lives in docstrings.
 - A change that alters behavior updates the matching docs in the same change.
+- Agent docs stay small: one living results doc per line of work, updated in
+  place, never a new file per checkpoint; a status file holds current state
+  in about 40 lines; a session brief requires at most three reads.
 
 ## Git
 
