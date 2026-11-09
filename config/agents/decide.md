@@ -28,6 +28,4 @@ so far and the constraints. Return a call; change nothing.
   is fair to the stated hypothesis.
 - For a conclusion: say whether the evidence supports it at the scope claimed (data, conditions,
   sample size), and what narrower claim it does support.
-- For a done-review: list defects that block done, then optional improvements, each with a
-  file and line.
 - Keep it short: bullets, no preamble.

@@ -18,8 +18,6 @@ the results.
   count that matters, and note it next to every number.
 - Pin everything that moves: inputs, seeds, thread settings, caches, clocks, GPU state. Record the
   machine (cores, logical CPUs, GPU, library versions).
-- Log one line per stage (name, count, total) to a named file. A job over about 10 minutes also gets
-  a watcher on that file that reports failures.
 
 ## Cost model
 
@@ -31,7 +29,7 @@ exact path on a tiny slice first, so a late-stage bug does not appear at the end
 
 Speed has two multiplying levers: fewer things (priors, hints, coarse-to-fine, caching) and cheaper
 things (GPU, batching, precision). Cutting the count usually gains more, and where it changes what is
-searched it needs the owner's decision. Resource ceilings count as costs too: a run that peaks at
+searched it needs the user's decision. Resource ceilings count as costs too: a run that peaks at
 10.9 of 12.3 GB of GPU memory will fail when scaled up, not slow down.
 
 ## 2. Baseline
@@ -79,7 +77,7 @@ doing it faster:
    Skip it when the profile shows no allocation cost.
 
 A change that alters behaviour (which candidates are verified, a smaller search, lower precision with
-different outputs) is a decision for the owner. Measure it, put the numbers in front of them, and do
+different outputs) is a decision for the user. Measure it, put the numbers in front of them, and do
 not adopt it silently.
 
 ## Algorithms and data structures
@@ -125,7 +123,8 @@ changing the data structure often removes the hot loop altogether.
   A numerical change (FP16, a different kernel, a different order of summation) is compared against
   truth or a metric with a tolerance taken from the arithmetic, and reported as different, not as
   identical.
-- Keep the change only if it gains and the outputs hold; otherwise revert it and write down why.
+- Keep the change only if it gains and the outputs hold; otherwise undo the edit by hand and
+  write down why.
 - After the pass, profile again. Shares move: a part that took 15 ms alone took 80 ms under CPU
   contention, and a parallel kernel can slow the library it competes with. Sweep thread and worker
   counts into a table and choose a value on the plateau, not at its edge.

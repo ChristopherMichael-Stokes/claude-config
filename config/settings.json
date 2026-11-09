@@ -5,7 +5,12 @@
       "Bash(git reset --hard *)",
       "Bash(git clean *)",
       "Bash(git stash drop *)",
-      "Bash(git checkout -- *)"
+      "Bash(git checkout -- *)",
+      "Bash(git checkout . *)",
+      "Bash(git restore *)",
+      "Bash(git rebase *)",
+      "Bash(git branch -D *)",
+      "Bash(git -C * push*)"
     ],
     "ask": [
       "Bash(git commit *)"

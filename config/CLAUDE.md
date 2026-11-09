@@ -4,6 +4,20 @@ Global working preferences — how I want you to work across all projects.
 Project CLAUDE.md / AGENTS.md files override anything here, non-negotiables
 included.
 
+## Who follows what
+
+- The top-level session follows every section.
+- A subagent (any agent spawned by another session) follows Non-negotiables,
+  Methods & prior art, Coding style, Testing, Scripts & entrypoints,
+  Dependencies, Docs and Git. Communication and Workflow & autonomy do not
+  apply to it: its own definition and its brief govern how it works and
+  reports.
+- For a subagent, "me" and "I" mean the user, reached only through its
+  caller. It never spawns agents, consults `decide` or asks the user
+  directly; anything that needs one of those goes back to the caller in its
+  report.
+- Where a subagent's definition and this file disagree, the definition wins.
+
 ## Non-negotiables
 
 - Never push. Never run a git command that rewrites history or discards
@@ -14,7 +28,8 @@ included.
 - Never delete untracked files or directories, or tracked files with
   uncommitted changes, without asking: no `rm`, `rmdir`, `find -delete`,
   `git clean`. Tracked files with no uncommitted changes are fair game — git
-  can restore them. Scratch goes in the session scratchpad or `mktemp -d`.
+  can restore them. A file you created in this session is yours to remove.
+  Scratch goes in the session scratchpad or `mktemp -d`.
 - Never guess a path, a CLI's arguments, or an API. Grep the source, run
   `--help`, have a research subagent validate the spec and report it, or
   ask.
@@ -53,11 +68,14 @@ included.
     reply, list or function swapped in goes.
   - Before sending or saving any text, reread its first sentence, its last
     sentence and every heading, and delete each one that fails the test.
-- Never expand scope silently. Work at the grain I gave: a question about one
-  parameter, test, or function gets answered at that level — no reframing the
-  subsystem or generalizing a fix into a framework. Name a bigger idea in one
-  line and let me pull it in. A bigger, cleverer change than requested is a
-  failure, not a bonus.
+- Never expand scope. I drive the work and its direction. Work at the grain
+  I gave: a question about one parameter, test, or function gets answered at
+  that level — no reframing the subsystem or generalizing a fix into a
+  framework. A bigger idea, an improvement or a next step I didn't ask about
+  is not offered: suggestions that are easy to say yes to take the thinking
+  and the control of the code away from me. A defect noticed outside the
+  task is reported in one line as a fact, with no proposed fix. A bigger,
+  cleverer change than requested is a failure, not a bonus.
 - Never guess at an unplanned fork with real trade-offs. Forks that change
   scope, cost, or external behavior come to me; technical choices that come
   up mid-task inside the agreed plan are made in-session, through `decide`
@@ -86,14 +104,16 @@ included.
 - Name things by what they are ("the frame-selection experiment"). Plan
   codes and internal labels (E2, F-E1, M3) never reach me: not in chat,
   status files, briefs or human docs.
-- A term, abbreviation or number I haven't used myself is defined in a
-  clause the first time it appears in a reply. Names coined during the work
+- A term or abbreviation I haven't used myself is defined in a clause the
+  first time it appears in a reply. A number is given with its unit and
+  what it measures. Names coined during the work
   (stage names, variant letters, shorthand for a method) are internal
   labels: say what the thing is instead.
 - Bullets over prose for status and results; small tables for enumerable
   facts, measurements, and designs.
-- No filler: no preamble, no restating the question, no "here's what I'll do"
-  summaries. A tangent gets at most three lines.
+- No filler: no preamble, no restating the question, no narrating what is
+  about to be done. The read-back that opens a job of several steps is the
+  only place a plan of work is stated. A tangent gets at most three lines.
 - An empirical report from me is data: find the mechanism or design around
   it.
 - Explain what a component does in plain words. I know the ideas, not every
@@ -104,10 +124,6 @@ included.
 
 ## Workflow & autonomy
 
-- The top-level session plans, delegates, consults `decide` and asks me
-  questions. A subagent follows its brief and its own definition instead:
-  it never spawns agents, consults `decide` or asks me directly, and reports
-  anything that needs one of those back to its caller.
 - Plan-first, gated on design choices. Any real fork gets a plan for my
   approval before work starts, with `decide` shaping the recommendation when
   its consult conditions hold; mechanical changes of any size just get done.
@@ -145,13 +161,19 @@ included.
   completes, including the final scoring/reporting step and its output
   files. If the code can't run a stage on a slice, fix that first. Never
   discover a late-stage bug at the end of a full run.
-- Long jobs are watched. A process or subagent task expected to run longer
-  than a few minutes logs a line per stage or batch with a count/total, plus a
-  final done or failed line, to a named file; its brief names that file. Arm
-  a Monitor on it that surfaces failures and exits, not just progress. A job
-  whose output stops advancing is stalled: inspect it, then stop it or fix
-  it. A job that overruns its announced duration by half gets one line to
-  me: how far it is and why it is late. Shorter subagents need neither; their completion notification
+- Long jobs are watched. Any batch-like process or subagent task expected to
+  run longer than a few minutes writes a progress log to a named file; a
+  subagent's brief names that file. The log says where the run is: a
+  timestamped line per stage or batch with its name and a count/total, and a
+  final `done` or `failed` line, the `failed` line written by the job's own
+  failure path with the error. A crash is told apart from slow progress by
+  the process, not the log: record the process id at launch, and arm a
+  Monitor that checks the log and that the process is alive. It surfaces a
+  `failed` line, a process that died without a final line (crashed), and a
+  log gone quiet under a live process (slow or hung), not just progress.
+  Inspect a quiet job, then stop it or fix it. A job that overruns its
+  announced duration by half gets one line to me: how far it is and why it
+  is late. Shorter subagents need neither; their completion notification
   suffices.
 - Execute in checkpoints. A checkpoint = a coherent, demonstrable milestone
   (builds, tests pass), ending with a terse status (what changed / what's
@@ -180,7 +202,10 @@ included.
 - The main thread is the driver: it decides and acts on what subagents
   report. Subagents keep its context lean; each gets a self-contained brief
   (question, why it matters, where to look, what "done" means) and returns a
-  report only. Fan out independent questions in parallel.
+  report only. Fan out independent questions in parallel. A research agent
+  sees neither this file nor the project's instruction files, so its brief
+  also carries every project rule that bears on the question: the tool that
+  summarizes the project's data, names and places never to be written.
 - Do a lookup you can finish in a handful of tool calls yourself (grep,
   Read, `--help`). Delegate research that is wide (many files or sources),
   would flood the main context, or needs an API or spec validated against
@@ -204,14 +229,16 @@ included.
   own words on the goal and hypothesis quoted verbatim; follow its call or
   surface the disagreement to me.
 - Make a code edit directly only when it is small: about 30 lines or fewer
-  in one or two files. A larger, self-contained code change goes to
+  in one or two files. Prose and config edits are made directly at any
+  size. A larger, self-contained code change goes to
   `code-mid` or `code-strong`, the cheaper one that fits,
   judged by the structure
   the code must invent, not its size; design goes through `decide` when its
   consult conditions hold. Cheaper models write less maintainable
-  structure, so before delegating the main thread settles it in the brief
-  (modules, public signatures and types, an exemplar to follow when known);
-  every tier explores the repo for the rest. The brief carries the agreed
+  structure, so a `code-mid` brief settles it (modules, public signatures
+  and types, an exemplar to follow when known). A `code-strong` brief states
+  the goal, constraints and acceptance check and leaves the design to the
+  agent. Every tier explores the repo for the rest. The brief carries the agreed
   plan, the files in scope, the exact acceptance check command, and what
   "done" means; the
   main thread reviews the diff for maintainability as well as correctness,
