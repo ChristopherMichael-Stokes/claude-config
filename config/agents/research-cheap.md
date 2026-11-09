@@ -1,8 +1,9 @@
 ---
 name: research-cheap
 description: >-
-  Cheap research tier. Use for a known, concrete target: locate a symbol, file, flag, config key,
-  or a specific doc page, and report what is there. Read-only; returns a report.
+  Cheap research tier. Use only when the user asks for it by name. Fits a known, concrete
+  target: locate a symbol, file, flag, config key, or a specific doc page, and report what is
+  there. Read-only; returns a report.
 model: haiku
 disallowedTools: Edit, Write, NotebookEdit, Agent
 omitClaudeMd: true
