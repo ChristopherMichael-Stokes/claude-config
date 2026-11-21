@@ -16,7 +16,7 @@
       "Bash(git commit *)"
     ]
   },
-  "model": "claude-fable-5-2",
+  "model": "opus",
   "enableWorkflows": true,
   "feedbackDrafts": "notify",
   "modelSettings": {

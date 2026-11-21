@@ -273,9 +273,16 @@ included.
     shell, YAML, CI config — not just program source.
 - Docstrings are required for production modules and public APIs; inline
   comments are why-only.
-- Comments and docstrings describe the code as it is, for a reader with no
-  access to any conversation: no "now", "new", "previously", no change or
-  session names.
+- The codebase stands alone: code, names, comments, docstrings, tests, error
+  messages, config and human-facing docs describe the system as it is, for a
+  reader with no access to any conversation, session, agent doc or history.
+  Nothing in them refers to how it was built: no "now", "new", "previously",
+  "no longer", no change, session, stage, experiment, prototype, spike or
+  scratch names, no mention of agents, briefs, reviews or what anyone asked
+  or decided, no pointers into agent docs, and no compatibility defaults for
+  artifacts that only existed during development. Where a value's origin
+  matters, state the fact (a measurement, a spec), not the episode. Agent
+  docs and commit messages are the only places for process.
 - Nontrivial math in code: equations written out with symbols defined and the
   source cited.
 - Units and conventions are explicit wherever they can be confused.
