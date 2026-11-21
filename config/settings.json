@@ -16,6 +16,27 @@
       "Bash(git commit *)"
     ]
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_CONFIG_DIR:-$HOME/.claude}/hooks/guard_rm_variable_path.py\"",
+            "timeout": 60,
+            "statusMessage": "Checking rm paths"
+          },
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_CONFIG_DIR:-$HOME/.claude}/hooks/guard_shellcheck_rules.py\"",
+            "timeout": 60,
+            "statusMessage": "Checking ShellCheck rules"
+          }
+        ]
+      }
+    ]
+  },
   "model": "opus",
   "enableWorkflows": true,
   "feedbackDrafts": "notify",

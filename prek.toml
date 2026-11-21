@@ -78,12 +78,13 @@ id = "ruff-format"
 [[repos]]
 repo = "local"
 
-# ty reads requires-python from sync.py's PEP 723 block
+# ty reads requires-python from sync.py's PEP 723 block; ty does not read PEP 723 dependencies,
+# so the hooks' pins (config/hooks/*.py) are repeated here to resolve imports
 [[repos.hooks]]
 id = "ty"
 name = "ty"
 language = "system"
-entry = "uvx ty@0.0.95 check --no-progress"
+entry = "uvx --with pytest --with pydantic==2.14.4 --with tree-sitter==0.26.1 --with tree-sitter-bash==0.25.1 --with shellcheck-py==0.11.0.1 ty@0.0.95 check --no-progress"
 types = ["python"]
 
 [[repos]]

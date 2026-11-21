@@ -20,3 +20,7 @@ ignore = [
 
 [lint.pydocstyle]
 convention = "google"
+
+[lint.per-file-ignores]
+# pytest idiom: bare asserts, self-describing test names, no package __init__
+"tests/**" = ["S101", "D103", "INP001"]
